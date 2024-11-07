@@ -1,6 +1,4 @@
-import {
-  renderToDOM, filterBtnRow, studentAreas
-} from '../public/main';
+import renderToDOM from '../utils/domutils';
 
 import { sortStudent } from '../utils/sample_data/student_data';
 // add form to DOM on start-sorting click.
@@ -25,14 +23,4 @@ const form = () => {
   document.querySelector('#sorting').addEventListener('submit', sortStudent);
 };
 
-const events = () => {
-  // get form on the DOM on button click
-  document.querySelector('#start-sorting').addEventListener('click', () => {
-    // put html elements on the DOM on click
-    form(); // form
-    filterBtnRow(); // filter buttons
-    studentAreas(); // students and voldy's army divs
-  });
-};
-
-export { form, events };
+export { form };

@@ -1,8 +1,6 @@
-import {
-  createId, studentsOnDom, filterBtnRow, studentAreas
-} from '../../public/main';
 // eslint-disable-next-line import/extensions
 import { form } from '../../components/visual_elements';
+import { createId, renderToDOM, studentsOnDom } from '../domutils';
 
 const houses = [
   {
@@ -29,6 +27,25 @@ const houses = [
 
 const students = [];
 const voldysArmy = []; // starts as an empty array
+
+const studentAreas = () => {
+  const domString = `<div id="students">No Students</div>
+  <div id="voldy">No Death Eaters</div>`;
+
+  renderToDOM('#student-container', domString);
+};
+
+const filterBtnRow = () => {
+  const domString = `<div class="btn-group" role="group" aria-label="Basic example">
+      <button type="button" id="filter--hufflepuff" class="btn btn-warning btn-sm">Hufflepuff</button>
+      <button type="button" class="btn btn-primary btn-sm" id="filter--ravenclaw">Ravenclaw</button>
+      <button type="button" class="btn btn-success btn-sm" id="filter--slytherin">Slytherin</button>
+      <button type="button" class="btn btn-danger btn-sm" id="filter--gryffindor">Gryffindor</button>
+      <button type="button" class="btn btn-secondary btn-sm" id="filter--all">All</button>
+    </div>`;
+
+  renderToDOM('#filter-container', domString);
+};
 
 // ********** LOGIC  ********** //
 // sorts student to a house and then place them in the students array
@@ -112,6 +129,8 @@ const events = () => {
   });
 };
 
-export {
-  houses, students, voldysArmy, sortStudent, events
-};
+// export {
+//   houses, students, voldysArmy, sortStudent, events
+// };
+
+export { sortStudent, events };
