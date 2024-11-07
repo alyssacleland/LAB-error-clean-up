@@ -1,21 +1,7 @@
 import '../styles/main.scss'; // You have to import your styles for them to work. Comment in this line
-import { } from '../utils/sample_data/student_data'; // import student data
+import { events } from '../utils/sample_data/student_data'; // import student data
+import { renderToDOM } from '../utils/domutils';
 // eslint-disable-next-line import/extensions
-import { events } from '../components/visual_elements';
-
-const renderToDOM = (divId, content) => {
-  const selectedDiv = document.querySelector(divId);
-  selectedDiv.innerHTML = content;
-};
-
-// Create a new ID for the students
-const createId = (array) => {
-  if (array.length) {
-    const idArray = array.map((el) => el.id);
-    return Math.max(...idArray) + 1;
-  }
-  return 0;
-};
 
 // ********** HTML Components  ********** //
 // the basic HMTL structure of app
@@ -49,55 +35,6 @@ const startSortingBtn = () => {
   renderToDOM('#form-container', domString);
 };
 
-const studentAreas = () => {
-  const domString = `<div id="students">No Students</div>
-  <div id="voldy">No Death Eaters</div>`;
-
-  renderToDOM('#student-container', domString);
-};
-
-const studentsOnDom = (divId, array, house = 'Hogwarts') => {
-  let domString = '';
-  if (!array.length) {
-    domString += `NO ${house.toUpperCase()} STUDENTS`;
-  }
-
-  array.forEach((student) => {
-    domString += `
-    <div class="card bg-dark text-white">
-      <img src="${
-  divId === '#voldy'
-    ? 'https://carboncostume.com/wordpress/wp-content/uploads/2019/10/deatheater-harrypotter.jpg'
-    : student.crest
-}" 
-          class="card-img" alt="${student.house} crest">
-      <div class="card-img-overlay">
-        <h5 class="card-title">${student.name}</h5>
-        ${
-  divId === '#voldy'
-    ? '<p class="card-text">Death Eater</p>'
-    : ` <p class="card-text">${student.house}</p>
-          <button type="button" id="expel--${student.id}" class="btn btn-danger btn-sm">Expel</button>`
-}
-      </div>
-    </div>
-    `;
-  });
-  renderToDOM(divId, domString);
-};
-
-const filterBtnRow = () => {
-  const domString = `<div class="btn-group" role="group" aria-label="Basic example">
-      <button type="button" id="filter--hufflepuff" class="btn btn-warning btn-sm">Hufflepuff</button>
-      <button type="button" class="btn btn-primary btn-sm" id="filter--ravenclaw">Ravenclaw</button>
-      <button type="button" class="btn btn-success btn-sm" id="filter--slytherin">Slytherin</button>
-      <button type="button" class="btn btn-danger btn-sm" id="filter--gryffindor">Gryffindor</button>
-      <button type="button" class="btn btn-secondary btn-sm" id="filter--all">All</button>
-    </div>`;
-
-  renderToDOM('#filter-container', domString);
-};
-
 const startApp = () => {
   htmlStructure(); // always load first
   header();
@@ -106,7 +43,3 @@ const startApp = () => {
 };
 
 startApp();
-
-export {
-  createId, studentsOnDom, studentAreas, filterBtnRow, renderToDOM
-};
